@@ -2,7 +2,7 @@
 
 ---
 
-prve is a minimnal testing library. Prova provides a __Tester__ class and a few utilities functions.
+prve is a minimnal testing library. prve provides a __Tester__ class and a few utilities functions.
 
 prve is currently still in development.
 
