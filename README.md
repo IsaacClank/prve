@@ -2,7 +2,7 @@
 
 ---
 
-prve is a minimnal testing library. prve provides a __Tester__ class and a few utilities functions.
+prve is a minimnal testing library. prve provides a **Tester** class and a few utilities functions.
 
 prve is currently still in development.
 
@@ -10,18 +10,18 @@ prve is currently still in development.
 
 ### Basic
 
-1. Create a new __Tester__.
+1. Create a new **Tester**.
 2. Use add() method to add a new test function. (Test functions must return boolean or throw error)
-3. Run execute() method of __Tester__ object to execute tests.
+3. Run execute() method of **Tester** object to execute tests.
 
 ```javascript
 const tester = new Tester('Tester1');
 
 tester.add(function test1() {
-  assert(true)
-})
+  assert(true);
+});
 
-tester.execute()
+tester.execute();
 ```
 
 ### Advanced
@@ -29,25 +29,31 @@ tester.execute()
 ```javascript
 const testers = [];
 
-const tester1 = new Tester('tester1')
-tester1.add(function test1(){
-  // return boolean or throw error
-})
+const tester1 = new Tester('tester1');
+tester1.add({
+  name: 'Test should do something',
+  body: () => {
+    // return boolean or throw error
+  },
+});
 
-const tester2 = new Tester('tester2')
-tester2.add(function test2(){
-  // return boolean or throw error
-})
+const tester2 = new Tester('tester2');
+tester2.add({
+  name: 'Test should do something',
+  body: () => {
+    // return boolean or throw error
+  },
+});
 
-testers.push(tester1)
-testers.push(tester2)
+testers.push(tester1);
+testers.push(tester2);
 
 // Run all tests
-testers.forEach(tester => tester.execute())
+testers.forEach(tester => tester.execute());
 
 // Only run tests of tester1
-const ignore = ['tester2']
-testers.forEach(tester => !ignore.includes(tester.name) && tester.execute())
+const ignore = ['tester2'];
+testers.forEach(tester => !ignore.includes(tester.name) && tester.execute());
 ```
 
 ## II. API
@@ -56,26 +62,39 @@ testers.forEach(tester => !ignore.includes(tester.name) && tester.execute())
 
 Fields:
 
-* ___name__ : name of this tester.
-* ___tests__ : list of test functions.
+- **\_name** : name of this tester.
+- **\_tests** : list of test functions.
 
 Methods:
 
-* __add(test: ()=>boolean)__ : define a test function.
-* __execute()__ : execute all tests managed by this tester.
+- **add(test: Test)** : define a test function.
+- **execute(options?: ExecuteOptions)** : execute all tests managed by this tester, an optional options object can be passed as arguments.
 
-### ITester
+Execute options:
 
-Interface for Tester class. Can be used to implements your own tester class.
+```javascript
+interface ExecuteOptions {
+  verbose: boolean; // Should error messages be output to the console
+}
+```
+
+### Interfaces
+
+Can be used to implements your own Tester/Test class.
 
 ```javascript
 interface ITester {
   add(test: () => boolean): void;
   execute(): void;
 }
+
+interface ITest {
+  name: string;
+  execute: () => boolean;
+}
 ```
 
 ### Utilities
 
-* __assert(value:any) => boolean__: returns (value === true)
-* __assertEq(left:any, right:any) => boolean__: checks if left===right
+- **assert(value:any) => boolean**: returns (value === true)
+- **assertEq(left:any, right:any) => boolean**: checks if left===right
