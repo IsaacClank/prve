@@ -1,3 +1,3 @@
 export * from './tester';
-export * from './type';
+export * from './test';
 export * from './util';
